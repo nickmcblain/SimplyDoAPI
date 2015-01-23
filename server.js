@@ -15,8 +15,8 @@ db.once('open', function (callback) {
   
 });
 
-app.get('/', function(request, response) {
-  
+app.get('/', function(req, res) {
+  alert('Hi');
 });
 
 app.listen(app.get('port'), function() {
