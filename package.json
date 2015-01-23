@@ -1,0 +1,10 @@
+{
+  "name": "simple-api",
+  "description": "SimplyDo API",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "express": "^4.11.1",
+    "mongoose": "^3.8.21"
+  }
+}
