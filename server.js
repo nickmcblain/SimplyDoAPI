@@ -14,6 +14,7 @@ app.use(bodyParser.json());
 // Port selection
 app.set('port', (process.env.PORT || 5000))
 
+
 // ===============================================
 // ============= Database Connection =============
 // ===============================================
@@ -21,8 +22,10 @@ mongoose.connect('mongodb://heroku_app33442719:97eb3j95dp0v6fcl7k7lvgtaf0@ds0374
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function (callback) {
-  console.log()
+  console.log('Database connection successful.')
 });
+var Task = require('/models/task');
+
 
 // ===============================================
 // ================ Open API port ================
@@ -30,6 +33,7 @@ db.once('open', function (callback) {
 app.listen(app.get('port'), function() {
   console.log('API is running on ' + app.get('port'))
 });
+
 
 // ===============================================
 // =============== Handle Requests ===============
@@ -44,3 +48,20 @@ router.use(function(req, res, next) {
     console.log('Request made');
     next();
 });
+
+router.route('/tasks')
+	.get(function(req, res){
+		Task.find(function(err, tasks){
+			if(err)
+				res.send(err);
+
+			res.json(tasks);
+		});
+	})
+	.post(function(req, res){
+		var task = new Task();
+
+		task.save()
+	})
+
+app.use('/api', router);
