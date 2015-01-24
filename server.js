@@ -64,6 +64,29 @@ router.route('/tasks')
 			if(err)
 				res.send(err);
 		});
+	});
+
+router.route('/tasks/:task_id')
+	.get(function(req, res){
+		Task.find(req.params.task_id, function(err, task){
+			if(err)
+				res.send(err);
+
+			res.json(task);
+		});
 	})
+	.post(function(req, res){
+		var task = new Task();
+
+		task.title = req.body.title;
+		task.author = req.body.author;
+		task.contents = req.body.contents;
+		task.tag = req.body.tag;
+
+		task.save(function(err){
+			if(err)
+				res.send(err);
+		});
+	});
 
 app.use('/api', router);
