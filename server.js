@@ -61,7 +61,12 @@ router.route('/tasks')
 	.post(function(req, res){
 		var task = new Task();
 
-		task.save()
+		var title = req.body.title;
+
+		task.save(function(err){
+			if(err)
+				res.send(err);
+		});
 	})
 
 app.use('/api', router);
