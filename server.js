@@ -4,6 +4,7 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 var cors = require('cors');
+var mongoose = require('mongoose');
 
 // Start the express application and apply dependancies
 app.use(cors());
@@ -15,9 +16,17 @@ app.set('port', (process.env.PORT || 5000))
 
 
 // ===============================================
-// =============== Include Helpers ===============
+// ============= Database Connection =============
 // ===============================================
 var config = require('/js/config');
+mongoose.connect(config.getURI);
+
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function (callback) {
+  console.log('Database connection successful.')
+});
+
 var Task = require('/models/task');
 
 
