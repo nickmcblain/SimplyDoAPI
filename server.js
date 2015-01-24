@@ -7,6 +7,7 @@ var cors = require('cors');
 var mongoose = require('mongoose');
 
 // Start the express application and apply dependancies
+var app = express();
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
