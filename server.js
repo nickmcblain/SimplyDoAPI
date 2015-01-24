@@ -19,7 +19,7 @@ app.set('port', (process.env.PORT || 5000))
 // ===============================================
 // ============= Database Connection =============
 // ===============================================
-var config = require('/js/config');
+var config = require('js/config');
 mongoose.connect(config.getURI);
 
 var db = mongoose.connection;
@@ -28,7 +28,7 @@ db.once('open', function (callback) {
   console.log('Database connection successful.')
 });
 
-var Task = require('/models/task');
+var Task = require('js/models/task');
 
 
 // ===============================================
