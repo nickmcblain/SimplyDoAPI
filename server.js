@@ -120,7 +120,7 @@ router.route('/tasks/:task_id')
 // ================ User Handling ================
 // ===============================================
 router.route('/users')
-	.post(auth.isAuthenticated, function(req, res){
+	.post(function(req, res){
 		var user = new User();
 
 		user.username = req.body.username;
