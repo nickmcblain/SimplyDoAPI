@@ -54,7 +54,7 @@ router.use(function(req, res, next) {
 
 router.route('/tasks')
 	.get(function(req, res){
-		Task.find(function(err, tasks){
+		db.Task.find(function(err, tasks){
 			if(err)
 				res.send(err);
 
