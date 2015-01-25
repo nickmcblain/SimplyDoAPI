@@ -19,8 +19,7 @@ app.set('port', (process.env.PORT || 5000))
 // ===============================================
 // ============= Database Connection =============
 // ===============================================
-var config = require('/js/config.js');
-mongoose.connect(config.getURI);
+mongoose.connect('mongodb://heroku_app33442719:97eb3j95dp0v6fcl7k7lvgtaf0@ds037451.mongolab.com:37451/heroku_app33442719');
 
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
@@ -28,7 +27,7 @@ db.once('open', function (callback) {
   console.log('Database connection successful.')
 });
 
-var Task = require('/js/models/task');
+var Task = require('./js/models/task');
 
 
 // ===============================================
