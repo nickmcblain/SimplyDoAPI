@@ -4,10 +4,12 @@
   "version": "0.0.1",
   "private": true,
   "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.10.2",
     "cors": "^2.5.3",
     "express": "^4.11.1",
     "mongoose": "^3.8.21",
-    "passport": "^0.2.1"
+    "passport": "^0.2.1",
+    "passport-http": "^0.2.2"
   }
 }

@@ -5,6 +5,8 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var cors = require('cors');
 var mongoose = require('mongoose');
+var passport = require('passport');
+var auth = require('./controllers/auth');
 
 // Start the express application and apply dependancies
 var app = express();
@@ -28,6 +30,7 @@ db.once('open', function (callback) {
 });
 
 var Task = require('./js/models/task');
+var User = require('./js/models/user');
 
 
 // ===============================================
@@ -52,8 +55,11 @@ router.use(function(req, res, next) {
     next();
 });
 
+// ===============================================
+// ================ Task Handling ================
+// ===============================================
 router.route('/tasks')
-	.get(function(req, res){
+	.get(auth.isAuthenticated, function(req, res){
 		Task.find(function(err, tasks){
 			if(err)
 				res.send(err);
@@ -61,7 +67,7 @@ router.route('/tasks')
 			res.json(tasks);
 		});
 	})
-	.post(function(req, res){
+	.post(auth.isAuthenticated, function(req, res){
 		var task = new Task();
 
 		task.title = req.body.title;
@@ -78,7 +84,7 @@ router.route('/tasks')
 	});
 
 router.route('/tasks/:task_id')
-	.get(function(req, res){
+	.get(auth.isAuthenticated, function(req, res){
 		Task.find(req.params.task_id, function(err, task){
 			if(err)
 				res.send(err);
@@ -86,7 +92,7 @@ router.route('/tasks/:task_id')
 			res.json(task);
 		});
 	})
-	.post(function(req, res){
+	.post(auth.isAuthenticated, function(req, res){
 		var task = new Task();
 
 		task.title = req.body.title;
@@ -98,6 +104,46 @@ router.route('/tasks/:task_id')
 			if(err)
 				res.send(err);
 		});
-	});
+	})
+	.delete(auth.isAuthenticated, function(req, res){
+		Task.remove(req.params.task_id, function(err){
+			if(err)
+				res.send(err);
 
+			res.send('Task deleted');
+		});
+
+	})
+
+
+// ===============================================
+// ================ User Handling ================
+// ===============================================
+router.route('/users')
+	.post(function(req, res){
+		var user = new User();
+
+		user.username = req.body.username;
+		user.password = req.body.password;
+
+		user.save(function(err){
+			if(err)
+				res.send(err);
+
+			res.send('Created user');
+		});
+	})
+	.get(function(req, res){
+		User.find(function(err, users){
+			if(err)
+				res.send(err);
+
+			res.send(users);
+		});
+	})
+
+
+// ===============================================
+// =============== Specifiy Route ================
+// ===============================================
 app.use('/api', router);
