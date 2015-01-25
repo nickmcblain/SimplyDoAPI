@@ -6,7 +6,7 @@ var bodyParser = require('body-parser');
 var cors = require('cors');
 var mongoose = require('mongoose');
 var passport = require('passport');
-var auth = require('./controllers/auth');
+var auth = require('./js/controllers/auth');
 
 // Start the express application and apply dependancies
 var app = express();
