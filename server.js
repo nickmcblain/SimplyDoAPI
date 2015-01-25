@@ -60,7 +60,7 @@ router.use(function(req, res, next) {
 // ===============================================
 router.route('/tasks')
 	.get(auth.isAuthenticated, function(req, res){
-		Task.find(function(err, tasks){
+		Task.find({userID: req.body._id}, function(err, tasks){
 			if(err)
 				res.send(err);
 
@@ -71,9 +71,9 @@ router.route('/tasks')
 		var task = new Task();
 
 		task.title = req.body.title;
-		task.author = req.body.author;
 		task.contents = req.body.contents;
 		task.tag = req.body.tag;
+		task.userID = req.body._id;
 
 		task.save(function(err){
 			if(err)
@@ -85,7 +85,7 @@ router.route('/tasks')
 
 router.route('/tasks/:task_id')
 	.get(auth.isAuthenticated, function(req, res){
-		Task.find(req.params.task_id, function(err, task){
+		Task.find({userID: req.body._id, _id: req.params.task_id}, function(err, task){
 			if(err)
 				res.send(err);
 
@@ -106,7 +106,7 @@ router.route('/tasks/:task_id')
 		});
 	})
 	.delete(auth.isAuthenticated, function(req, res){
-		Task.remove(req.params.task_id, function(err){
+		Task.remove({userID: req.body._id, _id: req.params.task_id}, function(err){
 			if(err)
 				res.send(err);
 
