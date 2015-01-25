@@ -54,7 +54,7 @@ router.use(function(req, res, next) {
 
 router.route('/tasks')
 	.get(function(req, res){
-		db.Task.find(function(err, tasks){
+		Task.find(function(err, tasks){
 			if(err)
 				res.send(err);
 
@@ -72,6 +72,8 @@ router.route('/tasks')
 		task.save(function(err){
 			if(err)
 				res.send(err);
+
+			res.send('Task added');
 		});
 	});
 
