@@ -13,6 +13,7 @@ var app = express();
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+app.use(passport.initialize());
 
 // Port selection
 app.set('port', (process.env.PORT || 5000));
