@@ -19,7 +19,7 @@ app.set('port', (process.env.PORT || 5000));
 // ===============================================
 // ============= Database Connection =============
 // ===============================================
-mongoose.connect('mongodb://heroku_app33442719:97eb3j95dp0v6fcl7k7lvgtaf0@ds037451.mongolab.com:37451/heroku_app33442719');
+mongoose.connect(process.env.MONGOLAB_URI);
 
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
