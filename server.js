@@ -131,6 +131,16 @@ router.route('/users')
 		});
 	});
 
+router.route('/user/:username')
+	.get(function(req, res){
+		User.find({username: req.body.username}, function(err, user){
+			if(err)
+				return res.send(err);
+
+			res.send('User exists')
+		});
+	});
+
 
 // ===============================================
 // =============== Specifiy Route ================
