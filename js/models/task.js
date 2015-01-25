@@ -8,4 +8,4 @@ var taskSchema = new Schema({
 	tag: String
 });
 
-var Task = mongoose.model('Task', taskSchema);
+module.exports = mongoose.model('Task', taskSchema);
