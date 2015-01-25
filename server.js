@@ -93,18 +93,14 @@ router.route('/tasks/:task_id')
 			res.json(task);
 		});
 	})
-	.post(auth.isAuthenticated, function(req, res){
-		var task = new Task();
-
-		task.title = req.body.title;
-		task.author = req.body.author;
-		task.contents = req.body.contents;
-		task.tag = req.body.tag;
-
-		task.save(function(err){
-			if(err)
-				res.send(err);
-		});
+	.put(auth.isAuthenticated, function(req, res){
+		Task.update(
+			{userId: req.user._id, _id: req.params._id},
+			{title: req.body.title, contents: req.body.contents, tag: req.body.tag},
+			function(err){
+				if(err)
+					res.send(err);
+			});
 	})
 	.delete(auth.isAuthenticated, function(req, res){
 		Task.remove({userID: req.body._id, _id: req.params.task_id}, function(err){
@@ -133,15 +129,7 @@ router.route('/users')
 
 			res.send('Created user');
 		});
-	})
-	.get(function(req, res){
-		User.find(function(err, users){
-			if(err)
-				return res.send(err);
-
-			res.send(users);
-		});
-	})
+	});
 
 
 // ===============================================
