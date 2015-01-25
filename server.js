@@ -120,7 +120,7 @@ router.route('/tasks/:task_id')
 // ================ User Handling ================
 // ===============================================
 router.route('/users')
-	.post(function(req, res){
+	.post(auth.isAuthenticated, function(req, res){
 		var user = new User();
 
 		user.username = req.body.username;
@@ -128,7 +128,7 @@ router.route('/users')
 
 		user.save(function(err){
 			if(err)
-				res.send(err);
+				return res.send(err);
 
 			res.send('Created user');
 		});
@@ -136,7 +136,7 @@ router.route('/users')
 	.get(function(req, res){
 		User.find(function(err, users){
 			if(err)
-				res.send(err);
+				return res.send(err);
 
 			res.send(users);
 		});
