@@ -63,7 +63,14 @@ router.use(function(req, res, next) {
 // ===============================================
 // ================ Login/Logout =================
 // ===============================================
+router.route('/login')
+	.post(auth.isAuthenticated, function(req, res){});
 
+router.route('/logout')
+	.get(function(req, res){
+		req.logout();
+  		res.send('/app-login');
+	});
 
 
 // ===============================================
