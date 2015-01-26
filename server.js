@@ -65,6 +65,7 @@ router.use(function(req, res, next) {
 // ===============================================
 router.route('/login')
 	.post(auth.isAuthenticated, function(req, res){
+		console.log('Error in the building');
 		res.send('/app');
 	});
 
