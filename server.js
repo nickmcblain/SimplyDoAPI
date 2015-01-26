@@ -148,6 +148,14 @@ router.route('/users')
 
 			res.send('Created user');
 		});
+	})
+	.get(function(req, res){
+		User.find(function(err, users){
+			if(err)
+				return res.send(err);
+
+			res.send(users);
+		});
 	});
 
 router.route('/user/:username')
