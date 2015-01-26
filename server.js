@@ -5,15 +5,18 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var cors = require('cors');
 var mongoose = require('mongoose');
+var session = require('express-session')
 var passport = require('passport');
 var auth = require('./js/controllers/auth');
 
 // Start the express application and apply dependancies
 var app = express();
+app.use(session({ secret: 'keyboard cat' }));
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(passport.initialize());
+app.use(passport.session());
 
 // Port selection
 app.set('port', (process.env.PORT || 5000));
@@ -55,6 +58,13 @@ router.use(function(req, res, next) {
     console.log('Request made');
     next();
 });
+
+
+// ===============================================
+// ================ Login/Logout =================
+// ===============================================
+
+
 
 // ===============================================
 // ================ Task Handling ================
@@ -137,7 +147,7 @@ router.route('/user/:username')
 			if(err)
 				return res.send(err);
 
-			res.send('User exists')
+			res.send('User exists');
 		});
 	});
 
