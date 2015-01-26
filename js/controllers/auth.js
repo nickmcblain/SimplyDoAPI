@@ -49,4 +49,13 @@ passport.deserializeUser(function(id, done) {
 // ===============================================
 // ============== Authentification ===============
 // ===============================================
-exports.isAuthenticated = passport.authenticate('local');
+module.exports = {
+  login: passport.authenticate('local'),
+  isAuthenticated: function(req, res, next){
+    if(req.isAuthenticated()){
+          next();
+      }else{
+          res.status(401).send({success: false, message: 'Session not valid'});
+      }
+  }
+};
