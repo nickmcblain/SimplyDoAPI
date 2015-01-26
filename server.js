@@ -5,7 +5,7 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var cors = require('cors');
 var mongoose = require('mongoose');
-var session = require('express-session')
+var session = require('express-session');
 var passport = require('passport');
 var auth = require('./js/controllers/auth');
 
@@ -30,7 +30,7 @@ mongoose.connect(process.env.MONGOLAB_URI);
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function (callback) {
-  console.log('Database connection successful.')
+  console.log('Database connection successful.');
 });
 
 // Load in models
@@ -42,7 +42,7 @@ var User = require('./js/models/user');
 // ================ Open API port ================
 // ===============================================
 app.listen(app.get('port'), function() {
-  console.log('API is running on ' + app.get('port'))
+  console.log('API is running on ' + app.get('port'));
 });
 
 
@@ -65,8 +65,7 @@ router.use(function(req, res, next) {
 // ================ Login/Logout =================
 // ===============================================
 router.route('/login')
-	.post(function(req, res){
-		passport.athenticate();
+	.post(auth.login, function(req, res){
 		res.send('/app');
 	});
 
@@ -131,7 +130,7 @@ router.route('/tasks/:task_id')
 			res.send('Task deleted');
 		});
 
-	})
+	});
 
 
 // ===============================================
