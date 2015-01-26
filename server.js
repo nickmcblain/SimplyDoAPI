@@ -33,6 +33,7 @@ db.once('open', function (callback) {
   console.log('Database connection successful.')
 });
 
+// Load in models
 var Task = require('./js/models/task');
 var User = require('./js/models/user');
 
@@ -64,8 +65,8 @@ router.use(function(req, res, next) {
 // ================ Login/Logout =================
 // ===============================================
 router.route('/login')
-	.post(auth.isAuthenticated, function(req, res){
-		console.log('Error in the building');
+	.post(function(req, res){
+		passport.athenticate();
 		res.send('/app');
 	});
 
