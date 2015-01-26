@@ -64,7 +64,9 @@ router.use(function(req, res, next) {
 // ================ Login/Logout =================
 // ===============================================
 router.route('/login')
-	.post(auth.isAuthenticated, function(req, res){});
+	.post(auth.isAuthenticated, function(req, res){
+		res.send('/app');
+	});
 
 router.route('/logout')
 	.get(function(req, res){
