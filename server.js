@@ -81,7 +81,7 @@ router.route('/logout')
 // ===============================================
 router.route('/tasks')
 	.get(auth.isAuthenticated, function(req, res){
-		Task.find({userID: req.body._id}, function(err, tasks){
+		Task.find({userID: User._id}, function(err, tasks){
 			if(err)
 				res.send(err);
 
