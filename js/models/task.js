@@ -10,8 +10,9 @@ var Schema = mongoose.Schema;
 // ===============================================
 var taskSchema = new Schema({
 	title: String,
-	contents: [{body: String}],
-	tag: String,
+	images: [{url: String}],
+	contents: [{content: String}],
+	tags: String,
 	userID: String
 });
 

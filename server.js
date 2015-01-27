@@ -92,9 +92,10 @@ router.route('/tasks')
 		var task = new Task();
 
 		task.title = req.body.title;
+		task.tags = req.body.tags;
+		task.images = req.body.images;
 		task.contents = req.body.contents;
-		task.tag = req.body.tag;
-		task.userID = req.body._id;
+		task.userID = User._id;
 
 		task.save(function(err){
 			if(err)
