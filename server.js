@@ -95,7 +95,7 @@ router.route('/tasks')
 
 		task.title = req.body.title;
 		task.tags = req.body.tags;
-		task.images = req.body.images.url;
+		task.images = req.body.images;
 		task.contents = req.body.contents;
 		task.userID = User._id;
 
