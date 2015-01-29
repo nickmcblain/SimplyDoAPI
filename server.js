@@ -12,7 +12,7 @@ var auth = require('./js/controllers/auth');
 // Start the express application and apply dependancies
 var app = express();
 app.use(session({ secret: 'keyboard cat' }));
-app.use(cors());
+app.use(cors({origin: 'http://localhost:8100', credentials: true}));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(passport.initialize());
