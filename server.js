@@ -108,6 +108,7 @@ router.route('/tasks')
 	})
 	.delete(function(req, res){
 		Task.remove({});
+		res.send('Documents removed');
 	});
 
 router.route('/tasks/:task_id')
