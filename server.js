@@ -91,11 +91,11 @@ router.route('/tasks')
 	.post(auth.isAuthenticated, function(req, res){
 		var task = new Task();
 
-		console.log(req.body.images);
+		console.log(req.body.images.url);
 
 		task.title = req.body.title;
 		task.tags = req.body.tags;
-		task.images = req.body.images;
+		task.images = req.body.images.url;
 		task.contents = req.body.contents;
 		task.userID = User._id;
 
