@@ -91,7 +91,7 @@ router.route('/tasks')
 	.post(auth.isAuthenticated, function(req, res){
 		var task = new Task();
 
-		console.log(req.body.title);
+		console.log(req.body.images);
 
 		task.title = req.body.title;
 		task.tags = req.body.tags;
@@ -108,7 +108,7 @@ router.route('/tasks')
 	})
 	.delete(function(req, res){
 		Task.remove({});
-		res.send('Documents removed');
+		res.send('Tasks removed');
 	});
 
 router.route('/tasks/:task_id')
