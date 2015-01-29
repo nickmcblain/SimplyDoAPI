@@ -132,7 +132,7 @@ router.route('/tasks/:task_id')
 	.delete(auth.isAuthenticated, function(req, res){
 		Task.remove({userID: req.body._id, _id: req.params.task_id}, function(err){
 			if(err)
-				res.send(err);
+				return res.send(err);
 
 			res.send('Task deleted');
 		});
