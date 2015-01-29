@@ -105,6 +105,9 @@ router.route('/tasks')
 
 			res.send('Task added');
 		});
+	})
+	.delete(function(req, res){
+		Task.remove({});
 	});
 
 router.route('/tasks/:task_id')
