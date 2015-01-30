@@ -83,7 +83,7 @@ router.route('/tasks')
 	.get(auth.isAuthenticated, function(req, res){
 		Task.find({userID: req.body._id}, function(err, tasks){
 			if(err)
-				res.send(err);
+				return res.send(err);
 
 			res.json(tasks);
 		});
@@ -99,7 +99,7 @@ router.route('/tasks')
 
 		task.save(function(err){
 			if(err)
-				res.send(err);
+				return res.send(err);
 
 			res.send('Task added');
 		});
@@ -113,7 +113,7 @@ router.route('/tasks/:task_id')
 	.get(auth.isAuthenticated, function(req, res){
 		Task.find({userID: req.body._id, _id: req.params.task_id}, function(err, task){
 			if(err)
-				res.send(err);
+				return res.send(err);
 
 			res.json(task);
 		});
