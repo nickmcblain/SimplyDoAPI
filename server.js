@@ -151,8 +151,9 @@ router.route('/users')
 		user.save(function(err){
 			if(err)
 				return res.send(err);
-
-			res.send('Created user');
+			passport.authenticate('local')(req, res, function () {
+                res.send('Created user');
+            });
 		});
 	})
 	.get(function(req, res){
