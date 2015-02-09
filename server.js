@@ -91,8 +91,6 @@ router.route('/tasks')
 	.post(auth.isAuthenticated, function(req, res){
 		var task = new Task();
 
-		console.log(req.body.image);
-
 		task.title = req.body.title;
 		task.tags = req.body.tags;
 		task.image = req.body.image;
